@@ -17,6 +17,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using FileBrowser.Search;
+using Lucene.Net.Documents;
 
 namespace FileBrowser.View
 {
@@ -30,9 +31,7 @@ namespace FileBrowser.View
         {
             InitializeComponent();
             BackButton.Command = BackCommand;
-            // BackButton.CommandParameter = this;
             ForwardButton.Command = ForwardCommand;
-            // ForwardButton.CommandParameter = this;
             // Create search index
             var searchIndexCreator = new IndexCreator(Dispatcher);
             // searchIndexCreator.CreateSearchIndex();
@@ -79,7 +78,6 @@ namespace FileBrowser.View
             }
             else
             {
-                filesItemView.DataContext = new FileItemsViewModel(new DirectoryRecord() { Info = new DirectoryInfo(lastDirectory) });
                 filesItemView.SetDataContext(new FileItemsViewModel(new DirectoryRecord() { Info = new DirectoryInfo(lastDirectory) }));
             }
         }
@@ -96,20 +94,47 @@ namespace FileBrowser.View
             var lastDirectory = FileBrowserHistory.GetTopForwardHistory();
             if (lastDirectory == String.Empty)
             {
-                filesItemView.DataContext = new FileItemsViewModel();
+                filesItemView.SetDataContext(new FileItemsViewModel());
             }
             else
             {
-                filesItemView.DataContext = new FileItemsViewModel(new DirectoryRecord() { Info = new DirectoryInfo(lastDirectory) });
+                filesItemView.SetDataContext(new FileItemsViewModel(new DirectoryRecord() { Info = new DirectoryInfo(lastDirectory) }));
             }
             FileBrowserHistory.PushBackHistory(FileBrowserHistory.PopForwardHistory());
-            filesItemView.LoadImagesAsync();
+            // filesItemView.LoadImagesAsync();
         }
 
         private void SearchButton_Click(object sender, RoutedEventArgs e)
         {
-             var searcher = new Searcher(@"E:\GitHub Project\Everything\PhotoApplication\bin\Debug\SearchIndex");
-             searcher.Search("Type:File AND Name:Lucene");
-        }        
+            var searcher = new Searcher(@"E:\GitHub Project\Everything\PhotoApplication\bin\Debug\SearchIndex");
+            var hits = searcher.Search(SearchInupt.Text);
+            var fileSystemItems = new List<FileSystemItem>();
+            for (int i = 0; i < hits.Count(); i++)
+            {
+                var hit = hits[i];
+                Document doc = searcher.GetDocument(hit.Doc);
+                Field fileNameField = doc.GetField("Name");
+                Field pathField = doc.GetField("Path");
+                Field typeField = doc.GetField("Type");
+                var fileItemType = FileItemType.File;
+                switch (typeField.StringValue)
+                { 
+                    case "File":
+                        fileItemType = FileItemType.File;
+                        break;
+                    case "Directory":
+                        fileItemType = FileItemType.Directory;
+                        break;
+                    case "Driver":
+                        fileItemType = FileItemType.Drive;
+                        break;
+
+                }
+                fileSystemItems.Add(new FileSystemItem(pathField.StringValue, fileNameField.StringValue, fileItemType));
+            }
+
+            FileBrowserHistory.PushBackHistory(FileBrowserHistory.SearchPage);
+            SetDataContext(new FileItemsViewModel(fileSystemItems));
+        }
     }
 }

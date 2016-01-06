@@ -60,5 +60,14 @@ namespace FileBrowser.ViewModel
             var directories = drivers.Select(info => new FileSystemItem(info.Name, info.Name, FileItemType.Drive));
             _directoriesAndFiles = new ObservableCollection<FileSystemItem>(directories);
         }
+
+        public FileItemsViewModel(IList<FileSystemItem> fileItems)
+        {
+            _directoriesAndFiles = new ObservableCollection<FileSystemItem>();
+            foreach (var fileItem in fileItems)
+            {
+                DirectoriesAndFiles.Add(fileItem);
+            }
+        }
     }
 }

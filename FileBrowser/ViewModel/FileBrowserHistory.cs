@@ -11,6 +11,7 @@ namespace FileBrowser.ViewModel
     {
         private static Stack<string> BackHistory = new Stack<string>();
         private static Stack<string> ForwardHistory = new Stack<string>();
+        public static readonly string SearchPage = "SearchPage";
 
         public static void PushBackHistory(string history)
         {
@@ -41,7 +42,7 @@ namespace FileBrowser.ViewModel
 
         public static void PushForwardHistory(string history)
         {
-            if (ForwardHistoryCount() != 0 && history == GetTopForwardHistory())
+            if (history == SearchPage || (ForwardHistoryCount() != 0 && history == GetTopForwardHistory()))
             {
                 return;
             }

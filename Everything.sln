@@ -1,13 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PlatformFramework", "Framework\PlatformFramework.csproj", "{5EE6E093-084C-44F0-BE3A-5333E636B09A}"
-EndProject
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PhotoApplication", "PhotoApplication\PhotoApplication.csproj", "{016DF225-B191-42F7-B3BE-836E2994B6BE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FileBrowser", "FileBrowser\FileBrowser.csproj", "{BA76F7C3-FFCE-4AA1-B4FB-11E9F8FE927F}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ShellControls", "ShellControls\ShellControls.csproj", "{266DED15-7ACB-41E5-A791-A343E03A9F17}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartFramework", "SmartFramework\SmartFramework.csproj", "{9A4C57B4-4EAB-49DA-8692-25E5D7B2174A}"
 EndProject
@@ -17,10 +15,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{5EE6E093-084C-44F0-BE3A-5333E636B09A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{5EE6E093-084C-44F0-BE3A-5333E636B09A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{5EE6E093-084C-44F0-BE3A-5333E636B09A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{5EE6E093-084C-44F0-BE3A-5333E636B09A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{016DF225-B191-42F7-B3BE-836E2994B6BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{016DF225-B191-42F7-B3BE-836E2994B6BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{016DF225-B191-42F7-B3BE-836E2994B6BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -29,10 +23,6 @@ Global
 		{BA76F7C3-FFCE-4AA1-B4FB-11E9F8FE927F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BA76F7C3-FFCE-4AA1-B4FB-11E9F8FE927F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BA76F7C3-FFCE-4AA1-B4FB-11E9F8FE927F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{266DED15-7ACB-41E5-A791-A343E03A9F17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{266DED15-7ACB-41E5-A791-A343E03A9F17}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{266DED15-7ACB-41E5-A791-A343E03A9F17}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{266DED15-7ACB-41E5-A791-A343E03A9F17}.Release|Any CPU.Build.0 = Release|Any CPU
 		{9A4C57B4-4EAB-49DA-8692-25E5D7B2174A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{9A4C57B4-4EAB-49DA-8692-25E5D7B2174A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9A4C57B4-4EAB-49DA-8692-25E5D7B2174A}.Release|Any CPU.ActiveCfg = Release|Any CPU

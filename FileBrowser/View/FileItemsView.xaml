@@ -111,7 +111,7 @@
                         <Image Source="../Resources/Forward.png"/>
                 </controls:ShellButton>
             <StackPanel Orientation="Horizontal" DockPanel.Dock="Right" >
-                <controls:ShellTextBox Width="220" Height="18" Margin="0,1,2,2"/>
+                <controls:ShellTextBox x:Name="SearchInupt" Width="220" Height="18" Margin="0,1,2,2"/>
                 <controls:ShellButton x:Name="SearchButton" Margin="0, 1, 0, 1" Click="SearchButton_Click">
                     <Image Source="../Resources/Search.png"/>
                 </controls:ShellButton>

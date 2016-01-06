@@ -35,13 +35,14 @@ namespace FileBrowser.View
             {
                 _loadingThread.Abort();
             }
-            _loadingThread = new Thread(new ThreadStart(DoLoadImagesAsync));
-            _loadingThread.Start();
+            
             _fileItemsViewModel = fileItemsViewModel;     
             // Load place holder
             CreateDefaultIcon(FileItemType.Drive);
             CreateDefaultIcon(FileItemType.Directory);
-            CreateDefaultIcon(FileItemType.File);  
+            CreateDefaultIcon(FileItemType.File);
+            _loadingThread = new Thread(new ThreadStart(DoLoadImagesAsync));
+            _loadingThread.Start();
 
             // if (_oldTask != null) 
             // {
