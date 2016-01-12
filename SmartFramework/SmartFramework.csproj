@@ -50,6 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controls\ShellButton.cs" />
+    <Compile Include="Controls\ShellComboBox.cs" />
     <Compile Include="Controls\ShellMenu.cs" />
     <Compile Include="Controls\ShellMenuItem.cs" />
     <Compile Include="Controls\ShellTabControl.cs" />
@@ -99,6 +100,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Themes\ShellButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\ShellComboBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

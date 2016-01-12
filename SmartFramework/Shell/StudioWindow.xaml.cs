@@ -22,17 +22,19 @@ namespace SmartFramework.Shell
     public partial class StudioWindow : Window
     {
         private MenuManager _menuManagr;
+        public Application Application { get; private set; }
 
         public ShellTabControl LeftPanelsContainer
         {
             get { return LeftPanels; }
         }
 
-        public StudioWindow()
+        public StudioWindow(Application application)
         {
             InitializeComponent();
             _menuManagr = new MenuManager(ApplicationMenu);
             _menuManagr.BuildMenu();
+            Application = application;
         }
     }
 }

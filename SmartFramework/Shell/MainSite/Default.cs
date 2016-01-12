@@ -20,5 +20,11 @@ namespace SmartFramework.Shell.MainSite
         {
             get { return new Grid(); }
         }
+
+
+        public System.Windows.Window Window
+        {
+            get { return null; }
+        }
     }
 }

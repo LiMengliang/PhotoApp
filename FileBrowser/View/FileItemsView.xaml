@@ -94,6 +94,7 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="20"/>
+            <RowDefinition Height="56"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
         <!--<StackPanel Grid.Row="0"  Orientation="Horizontal">-->
@@ -125,6 +126,7 @@
         <!--</StackPanel>-->         
         <ListBox x:Name="FileItems"
                  Grid.Row="1"
+                 Grid.RowSpan="2"
                  BorderThickness="0, 1, 0, 0"
                  Style="{StaticResource FileItemsStyle}"
                  ItemContainerStyle="{StaticResource FileItemStyle}" 
@@ -136,5 +138,6 @@
                 </ItemsPanelTemplate>
             </ListBox.ItemsPanel>
         </ListBox>
+        <local:SearchBox x:Name="SearchBox" Grid.Row="1" Margin="0, 1, 0, 0" HorizontalAlignment="Right" Visibility="Hidden"/>
     </Grid>
 </UserControl>

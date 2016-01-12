@@ -117,10 +117,22 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AllDisck" xml:space="preserve">
+    <value>All Disck</value>
+  </data>
+  <data name="CurrentDirectory" xml:space="preserve">
+    <value>Current Directory</value>
+  </data>
   <data name="FileTreePage" xml:space="preserve">
     <value>FILE</value>
   </data>
   <data name="LocalDisk" xml:space="preserve">
     <value>Local Disk {0} :</value>
+  </data>
+  <data name="SearchColor" xml:space="preserve">
+    <value>Color</value>
+  </data>
+  <data name="SearchName" xml:space="preserve">
+    <value>Name111</value>
   </data>
 </root>

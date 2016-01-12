@@ -30,7 +30,7 @@ namespace SmartFramework.Shell.LeftPanel
             _shellApplication = application;
             tabControl.SelectionChanged += InitializeSelectedPanel;
 
-            _leftPanels = application.Host.GetExports<ILeftPanel>().ToList();
+            _leftPanels = ShellApplication.Host.GetExports<ILeftPanel>().ToList();
             foreach (var leftPanel in _leftPanels)
             {
                 var tabItem = new ShellTabItem();

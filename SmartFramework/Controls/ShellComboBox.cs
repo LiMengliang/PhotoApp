@@ -8,11 +8,11 @@ using System.Windows.Controls;
 
 namespace SmartFramework.Controls
 {
-    public class ShellTextBox : TextBox
+    public class ShellComboBox : ComboBox
     {
-        static ShellTextBox()
+        static ShellComboBox()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ShellTextBox), new FrameworkPropertyMetadata(typeof(ShellTextBox)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(ShellComboBox), new FrameworkPropertyMetadata(typeof(ShellComboBox)));
         }
     }
 }

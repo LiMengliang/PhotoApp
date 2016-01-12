@@ -5,22 +5,17 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 using FileBrowser.Search;
 using Lucene.Net.Documents;
+using System.ComponentModel.Composition;
+using SmartFramework;
 
 namespace FileBrowser.View
 {
+    [Export(typeof(FileItemsView))]
     /// <summary>
     /// Interaction logic for FileItemsView.xaml
     /// </summary>
@@ -37,11 +32,16 @@ namespace FileBrowser.View
             // searchIndexCreator.CreateSearchIndex();
             _imageLoader = new ImageLoader(Dispatcher);
             Unloaded += EndLoadingImage;
+            FileItems.Focusable = true;
+            FileItems.Focus();
+            InitializeCommand();            
         }
 
         public static readonly ShellRelayCommand BackCommand = new ShellRelayCommand(BackCommandHandler, (x) => FileBrowserHistory.BackHistoryCount() > 1);
 
         public static readonly ShellRelayCommand ForwardCommand = new ShellRelayCommand(ForwardCommandHandler, (x) => FileBrowserHistory.ForwardHistoryCount() > 0);
+
+        public static readonly RoutedCommand SearchCommand = new RoutedCommand();
 
         public void OnItemDoubleClicked(object sender, MouseEventArgs args)
         {
@@ -65,6 +65,28 @@ namespace FileBrowser.View
         private void EndLoadingImage(object sender, RoutedEventArgs args)
         {
             _imageLoader.EndLoadingImages();
+        }
+
+        private void InitializeCommand()
+        {
+            var commandBinding = new CommandBinding();
+            commandBinding.Command = SearchCommand;
+            SearchCommand.InputGestures.Add(new KeyGesture(Key.F, ModifierKeys.Control));
+            commandBinding.CanExecute += commandBinding_CanExecute;
+            commandBinding.Executed += commandBinding_Executed;
+            var application = ShellApplication.Host.GetExports<ShellApplication>().First();
+            application.Value.MainWindow.CommandBindings.Add(commandBinding);
+        }
+
+        void commandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
+        {
+            SearchBox.Visibility = Visibility.Visible;
+        }
+
+        void commandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)
+        {
+            e.CanExecute = true;
+            e.Handled = true;
         }
 
         private static void BackCommandHandler(object parameter)

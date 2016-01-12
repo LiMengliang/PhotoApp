@@ -12,7 +12,7 @@ namespace SmartFramework.Shell.MainSite
     public class MainSiteManager
     {
         private static MainSiteManager _mainSiteManager;
-        private ShellApplication _shellApplication;
+        private ShellApplication ShellApplication { get; set; }
 
         [ImportMany(typeof(IMainSite))]
         private IEnumerable<Lazy<IMainSite>> _allMainSites;
@@ -30,7 +30,7 @@ namespace SmartFramework.Shell.MainSite
 
         public void InitializeMainSite(ShellApplication application)
         {
-            _shellApplication = application;
+            ShellApplication = application;
         }
 
         public void SetVisibleSite(IMainSite mainSite)
@@ -42,9 +42,9 @@ namespace SmartFramework.Shell.MainSite
                     _currentVisibleSite.RootFrameworkElement.Visibility = Visibility.Collapsed;
                 }                
                 _currentVisibleSite = mainSite;
-                if (!(_shellApplication.MainSite as Grid).Children.Contains(_currentVisibleSite.RootFrameworkElement))
+                if (!(ShellApplication.MainSite as Grid).Children.Contains(_currentVisibleSite.RootFrameworkElement))
                 {
-                    (_shellApplication.MainSite as Grid).Children.Add(_currentVisibleSite.RootFrameworkElement);
+                    (ShellApplication.MainSite as Grid).Children.Add(_currentVisibleSite.RootFrameworkElement);
                 }                
                 _currentVisibleSite.RootFrameworkElement.Visibility = Visibility.Visible;
             }

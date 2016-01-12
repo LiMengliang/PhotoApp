@@ -1,4 +1,5 @@
-﻿using SmartFramework.Shell.MainSite;
+﻿using SmartFramework;
+using SmartFramework.Shell.MainSite;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Composition;

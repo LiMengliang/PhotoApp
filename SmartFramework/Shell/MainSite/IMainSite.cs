@@ -10,7 +10,7 @@ namespace SmartFramework.Shell.MainSite
     public interface IMainSite
     {
         void Initialize();
-
+        
         FrameworkElement RootFrameworkElement { get; }
     }
 }

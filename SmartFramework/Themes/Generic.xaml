@@ -8,5 +8,6 @@
         <ResourceDictionary Source="pack://application:,,,/SmartFramework;component/Themes/TreeView.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/SmartFramework;component/Themes/ShellButton.xaml"/>
         <ResourceDictionary Source="pack://application:,,,/SmartFramework;component/Themes/ShellTextBox.xaml"/>
+        <ResourceDictionary Source="pack://application:,,,/SmartFramework;component/Themes/ShellComboBox.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

@@ -14,10 +14,30 @@ using Lucene.Net.QueryParsers;
 
 namespace FileBrowser.Search
 {
+    public enum SearchPurpose 
+    {
+        Name,
+        Color
+    }
+
+    public enum SearchScope
+    {
+        AllDisk,
+        CurrentDirectory
+    }
+
     public class Searcher
     {
         private IndexSearcher _indexSearcher;
         private string _indexDirectory;
+
+        public SearchPurpose SearchPurpose { get; set; }
+
+        public SearchScope SerchScope { get; set; }
+
+        public Searcher()
+        {             
+        }
 
         public Searcher(string indexDirectory)
         {

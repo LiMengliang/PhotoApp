@@ -68,6 +68,7 @@
     <Compile Include="ViewModel\FileSystemTreeViewModel.cs" />
     <Compile Include="ViewModel\FileSystemItem.cs" />
     <Compile Include="ViewModel\FileTypeToIconConverter.cs" />
+    <Compile Include="ViewModel\SearchBoxViewModel.cs" />
     <Compile Include="View\FileItemsSite.cs" />
     <Compile Include="View\FileItemsView.xaml.cs">
       <DependentUpon>FileItemsView.xaml</DependentUpon>
@@ -77,6 +78,9 @@
     </Compile>
     <Compile Include="View\FileTreePanel.cs" />
     <Compile Include="View\ImageLoader.cs" />
+    <Compile Include="View\SearchBox.xaml.cs">
+      <DependentUpon>SearchBox.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\LocalizedStrings.resx">
@@ -90,6 +94,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\FileSystemTreeViewer.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="View\SearchBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -113,6 +121,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Close.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

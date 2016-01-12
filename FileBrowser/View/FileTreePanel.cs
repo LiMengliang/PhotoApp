@@ -1,4 +1,5 @@
 ﻿using FileBrowser.Resources;
+using SmartFramework;
 using SmartFramework.Shell.LeftPanel;
 using SmartFramework.Shell.MainSite;
 using System;

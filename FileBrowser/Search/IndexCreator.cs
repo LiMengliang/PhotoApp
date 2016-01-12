@@ -59,7 +59,7 @@ namespace FileBrowser.Search
                 }
                 CreateIndexForAllFiles(directories, indexWriter);
             }
-            indexWriter.Close();
+            indexWriter.Dispose();
             MessageBox.Show("Finished");
         }
 

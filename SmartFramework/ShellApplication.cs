@@ -9,14 +9,15 @@ using SmartFramework.Shell;
 using SmartFramework.Core.Composition;
 using SmartFramework.Shell.MainSite;
 using SmartFramework.Shell.LeftPanel;
+using System.Windows.Input;
 
 namespace SmartFramework
 {
     public class ShellApplication : Application
     {
-        private StudioWindow _mainWindow;
+        public StudioWindow MainWindow { get; private set; }
         
-        public CompositionHost Host = CompositionHost.Instance();
+        public static CompositionHost Host = CompositionHost.Instance();
 
         private FrameworkElement _mainSite;
         public FrameworkElement MainSite
@@ -32,16 +33,17 @@ namespace SmartFramework
         }
 
         private void Initialize()
-        { 
-            _mainWindow = new StudioWindow();
-            _mainSite = _mainWindow.MainSite;
+        {
+            MainWindow = new StudioWindow(this);
+            _mainSite = MainWindow.MainSite;
             // Initialize Composition Host
             Host.InitiailizeComposition(this);
             // Initialize main sites
             MainSiteManager.Instance().InitializeMainSite(this);
             // Initialize left panels
-            LeftPanelManager.Instance().InitializeLeftPanels(this, _mainWindow.LeftPanelsContainer); 
-            _mainWindow.Show();           
-        }
+            LeftPanelManager.Instance().InitializeLeftPanels(this, MainWindow.LeftPanelsContainer);
+            MainWindow.Show();
+            
+        }        
     }
 }
