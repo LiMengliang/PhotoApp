@@ -61,6 +61,7 @@
     <Compile Include="Model\DirectoryRecord.cs" />
     <Compile Include="Search\IndexCreator.cs" />
     <Compile Include="Search\Searcher.cs" />
+    <Compile Include="Search\SearchItemInfo.cs" />
     <Compile Include="ViewModel\FileBrowserHistory.cs" />
     <Compile Include="ViewModel\FileItemsViewModel.cs" />
     <Compile Include="ViewModel\FileSystemUtilities.cs" />

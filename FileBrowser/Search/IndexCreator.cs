@@ -17,14 +17,29 @@ using System.Windows.Threading;
 
 namespace FileBrowser.Search
 {
+    public class IndexCreateTask
+    {
+        public Thread WorkingThread { get; private set; }
+        public object Metadata { get; set; }
+
+        public IndexCreateTask(Thread workingThread, object metaData)
+        {
+            WorkingThread = workingThread;
+            Metadata = metaData;
+        }
+    }
+
     public class IndexCreator
     {
         private Dispatcher _uiDispatcher;
         private BackgroundWorker _createIndexWorker;
 
+        private IList<Thread> _indexCreateTasks;
+
         public IndexCreator(Dispatcher uiDispatcher)
         {
             _uiDispatcher = uiDispatcher;
+            _indexCreateTasks = new List<Thread>();
         }
 
         public void CreateSearchIndex()
@@ -36,6 +51,39 @@ namespace FileBrowser.Search
             _createIndexWorker.WorkerSupportsCancellation = true;
             _createIndexWorker.DoWork += new DoWorkEventHandler(DoCreateSearchIndex);
             _createIndexWorker.RunWorkerAsync();
+        }
+
+        public void CreateFullDiskSearchIndexWithMultiThread()
+        {
+            foreach(var drive in DriveInfo.GetDrives())
+            {
+                try
+                {
+                    var directories = drive.RootDirectory.GetDirectories();
+                    _indexCreateTasks.Add(new Thread(() => DoCreateSearchIndex(drive)));
+                }
+                catch
+                {
+                    continue;
+                }
+            }
+            foreach(var task in _indexCreateTasks)
+            {
+                task.Start();
+            }
+
+        }
+
+        private void DoCreateSearchIndex(DriveInfo driver)
+        {
+            var indexDirectory = System.IO.Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"SearchIndex\"+driver.Name.Substring(0, 1));
+            Analyzer analyzer = new StandardAnalyzer(Lucene.Net.Util.Version.LUCENE_30);
+            var indexWriter = new IndexWriter(FSDirectory.Open(new DirectoryInfo(indexDirectory)),
+                analyzer, true, IndexWriter.MaxFieldLength.LIMITED);
+            ICollection<DirectoryInfo> directories;
+            directories = driver.RootDirectory.GetDirectories();
+            CreateIndexForAllFiles(directories, indexWriter);
+            MessageBox.Show(driver.Name+"Finished");
         }
 
         private void DoCreateSearchIndex(object sender, DoWorkEventArgs args)

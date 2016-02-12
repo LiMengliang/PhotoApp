@@ -125,7 +125,7 @@ namespace FileBrowser.ViewModel
 
         public SearchBoxViewModel()
         {
-            Searcher = new Searcher();
+            Searcher = new Searcher(@"E:\GitHub Project\Everything\PhotoApplication\bin\Debug\SearchIndex");
             DisplaySearchPurpose = new ObservableCollection<string>(new List<string>
                 {
                     LocalizedStrings.SearchName,

@@ -1,5 +1,6 @@
 ﻿using FileBrowser.Search;
 using FileBrowser.ViewModel;
+using Lucene.Net.Documents;
 using SmartFramework.Core.Command;
 using System;
 using System.Collections.Generic;
@@ -24,6 +25,7 @@ namespace FileBrowser.View
     public partial class SearchBox : UserControl
     {
         private SearchBoxViewModel _searchBoxViewModel;
+        public FileItemsView FileItemsView { get; set; }
         public SearchBox()
         {
             InitializeComponent();
@@ -39,9 +41,12 @@ namespace FileBrowser.View
 
         void commandBinding_Executed(object sender, ExecutedRoutedEventArgs e)
         {
-            // _searchBoxViewModel.Searcher.Search(SearchText.Text);
-            MessageBox.Show("Search" + _searchBoxViewModel.Searcher.SearchPurpose + _searchBoxViewModel.Searcher.SerchScope);
-            e.Handled = true;
+            var hits = _searchBoxViewModel.Searcher.Search(SearchText.Text);
+            var fileSystemItems = hits.Select(item => new FileSystemItem(item.Path, item.Name, item.FileItemType)).ToList();
+            FileBrowserHistory.PushBackHistory(FileBrowserHistory.SearchPage);
+            FileItemsView.SetDataContext(new FileItemsViewModel(fileSystemItems));
+            // MessageBox.Show("Search" + _searchBoxViewModel.Searcher.SearchPurpose + _searchBoxViewModel.Searcher.SerchScope);
+            // e.Handled = true;
         }
 
         void commandBinding_CanExecute(object sender, CanExecuteRoutedEventArgs e)

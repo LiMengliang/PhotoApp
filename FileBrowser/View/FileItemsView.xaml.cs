@@ -29,12 +29,13 @@ namespace FileBrowser.View
             ForwardButton.Command = ForwardCommand;
             // Create search index
             var searchIndexCreator = new IndexCreator(Dispatcher);
-            // searchIndexCreator.CreateSearchIndex();
+            //searchIndexCreator.CreateFullDiskSearchIndexWithMultiThread();
             _imageLoader = new ImageLoader(Dispatcher);
             Unloaded += EndLoadingImage;
             FileItems.Focusable = true;
             FileItems.Focus();
-            InitializeCommand();            
+            InitializeCommand();
+            SearchBox.FileItemsView = this;
         }
 
         public static readonly ShellRelayCommand BackCommand = new ShellRelayCommand(BackCommandHandler, (x) => FileBrowserHistory.BackHistoryCount() > 1);
@@ -130,31 +131,7 @@ namespace FileBrowser.View
         {
             var searcher = new Searcher(@"E:\GitHub Project\Everything\PhotoApplication\bin\Debug\SearchIndex");
             var hits = searcher.Search(SearchInupt.Text);
-            var fileSystemItems = new List<FileSystemItem>();
-            for (int i = 0; i < hits.Count(); i++)
-            {
-                var hit = hits[i];
-                Document doc = searcher.GetDocument(hit.Doc);
-                Field fileNameField = doc.GetField("Name");
-                Field pathField = doc.GetField("Path");
-                Field typeField = doc.GetField("Type");
-                var fileItemType = FileItemType.File;
-                switch (typeField.StringValue)
-                { 
-                    case "File":
-                        fileItemType = FileItemType.File;
-                        break;
-                    case "Directory":
-                        fileItemType = FileItemType.Directory;
-                        break;
-                    case "Driver":
-                        fileItemType = FileItemType.Drive;
-                        break;
-
-                }
-                fileSystemItems.Add(new FileSystemItem(pathField.StringValue, fileNameField.StringValue, fileItemType));
-            }
-
+            var fileSystemItems = hits.Select(item => new FileSystemItem(item.Path, item.Name, item.FileItemType)).ToList();
             FileBrowserHistory.PushBackHistory(FileBrowserHistory.SearchPage);
             SetDataContext(new FileItemsViewModel(fileSystemItems));
         }
